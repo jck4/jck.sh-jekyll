@@ -18,15 +18,29 @@ jobs:
 
       - name: Build and deploy with Docker Compose
         run: |
-          
-          # Build new images
+          # Build new image
           docker compose build --no-cache
           
-          # Deploy with zero downtime
-          docker compose up -d --no-deps --scale jekyll=2
+          # Scale up to 2 containers
+          docker compose up -d --scale jekyll=2
           
           # Wait for new container to be healthy
-          sleep 10
+          echo "Waiting for new container to be healthy..."
+          timeout=60
+          while [ $timeout -gt 0 ]; do
+            if curl -f "http://localhost:3001/health" > /dev/null 2>&1; then
+              echo "New container is healthy!"
+              break
+            fi
+            sleep 5
+            timeout=$((timeout-5))
+          done
           
-          # Remove old container
-          docker compose up -d --no-deps --scale jekyll=1 
+          if [ $timeout -le 0 ]; then
+            echo "Health check failed"
+            docker compose down
+            exit 1
+          fi
+          
+          # Scale back down to 1
+          docker compose up -d --scale jekyll=1 
