@@ -18,8 +18,6 @@ jobs:
 
       - name: Build and deploy with Docker Compose
         run: |
-          # Pull latest changes
-          docker compose pull
           
           # Build new images
           docker compose build --no-cache
