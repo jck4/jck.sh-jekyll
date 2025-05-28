@@ -16,11 +16,11 @@ jobs:
       - name: Build and deploy with Docker Compose
         run: |
           # Clone to /home/ubuntu if not exists, or pull if it does
-          if [ ! -d "/home/ubuntu/portfoliosite" ]; then
+          if [ ! -d "/home/ubuntu/jck.sh-jekyll" ]; then
             git clone http://github.com/jck4/jck.sh-jekyll /home/ubuntu/jck.sh-jekyll
           fi
           
-          cd /home/ubuntu/portfoliosite
+          cd /home/ubuntu/jck.sh-jekyll
           git pull
           
           # Build new image
