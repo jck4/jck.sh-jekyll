@@ -9,7 +9,7 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - .:/srv/jekyll:ro
+      - .:/srv/jekyll
       - jekyll-vendor:/srv/jekyll/vendor/bundle
       - jekyll-cache:/srv/jekyll/.jekyll-cache
       - jekyll-sass:/srv/jekyll/.sass-cache
