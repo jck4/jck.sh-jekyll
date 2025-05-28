@@ -1,0 +1,56 @@
+// Header styles
+header {
+    margin-bottom: 3rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid $border-color;
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    
+    nav {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        
+        a {
+            color: $primary-color;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+            
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: linear-gradient(90deg, $gradient-start, $gradient-end);
+                transition: width 0.3s ease;
+            }
+            
+            &:hover {
+                color: $secondary-color;
+                
+                &::after {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+// Footer styles
+footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid $border-color;
+    font-size: 0.9rem;
+    color: lighten($text-color, 30%);
+    text-align: center;
+} 

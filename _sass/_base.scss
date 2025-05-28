@@ -1,0 +1,40 @@
+// Base styles
+body {
+    font-family: $font-sans;
+    line-height: 1.7;
+    color: $text-color;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: $background-color;
+    animation: fadeIn 0.8s ease-out;
+}
+
+// Typography
+h1, h2, h3 {
+    color: $primary-color;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    animation: slideIn 0.5s ease-out;
+}
+
+h1 {
+    font-size: 3rem;
+    letter-spacing: -0.02em;
+    background: linear-gradient(90deg, $gradient-start, $gradient-end);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% auto;
+    animation: gradientFlow 5s ease infinite;
+}
+
+h2 {
+    font-size: 1.8rem;
+    letter-spacing: -0.01em;
+}
+
+h3 {
+    font-size: 1.4rem;
+} 

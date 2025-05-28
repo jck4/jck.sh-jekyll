@@ -1,0 +1,48 @@
+title: jck
+description: Cybersecurity Specialist & Software Engineer
+baseurl: ""
+url: "https://jck.sh"
+
+# Social links
+social:
+  github: jck4
+  linkedin: jck4
+
+# Build settings
+markdown: kramdown
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Collections
+collections:
+  projects:
+    output: true
+    permalink: /projects/:title/
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "project"
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+
+# Permalinks
+permalink: pretty
+
+# Redirects
+redirects:
+  /: /projects/
+
+# Sass settings
+sass:
+  style: compressed
+  load_paths:
+    - _sass
+  sass_dir: _sass 

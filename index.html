@@ -1,0 +1,292 @@
+---
+layout: default
+title: Projects
+---
+
+<div class="projects-index">
+    <div class="intro">
+        <h1>Projects</h1>
+        <p class="description">Software engineer. Building cool stuff.</p>
+        <div class="social-links">
+            {% if site.social.github %}
+            <a href="https://github.com/{{ site.social.github }}" class="social-link">GitHub</a>
+            {% endif %}
+            {% if site.social.linkedin %}
+            <a href="https://linkedin.com/in/{{ site.social.linkedin }}" class="social-link">LinkedIn</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="projects-grid">
+        {% for project in site.projects %}
+        <article class="project-item">
+            {% if project.image %}
+            <div class="project-image">
+                <img src="{{ project.image | relative_url }}" alt="{{ project.title }}">
+            </div>
+            {% endif %}
+            
+            <div class="project-content">
+                <h2>{{ project.title }}</h2>
+                <p class="description">{{ project.description }}</p>
+                
+                {% if project.technologies %}
+                <div class="technologies">
+                    {% for tech in project.technologies %}
+                    <span class="tech-tag">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <div class="project-links">
+                    {% if project.github_url %}
+                    <a href="{{ project.github_url }}" class="project-link">View on GitHub</a>
+                    {% endif %}
+                    {% if project.live_url %}
+                    <a href="{{ project.live_url }}" class="project-link">View Live</a>
+                    {% endif %}
+                    {% if project.license %}
+                    <span class="license">{{ project.license }} License</span>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+
+    <div class="tech-details">
+        <h2>Technical Details</h2>
+        <div class="tech-grid">
+            <div class="tech-item">
+                <h3>Domain</h3>
+                <p>jck.sh is registered through <a href="https://nic.sh" class="tech-link">nic.sh</a> and managed via Cloudflare for DNS and security.</p>
+            </div>
+            <div class="tech-item">
+                <h3>Hosting</h3>
+                <p>Built with Jekyll and served through GitHub Pages. The site is containerized using Docker for local development.</p>
+            </div>
+            <div class="tech-item">
+                <h3>Security</h3>
+                <p>Protected by Cloudflare's WAF and DDoS protection. SSL/TLS encryption enforced through Cloudflare's edge network.</p>
+            </div>
+            <div class="tech-item">
+                <h3>Monitoring</h3>
+                <p>Uptime monitoring via Cloudflare's health checks. Performance metrics tracked through Cloudflare Analytics.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+:root {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --accent: #60a5fa;
+    --accent-hover: #3b82f6;
+    --border: #334155;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.projects-index {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.intro {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.intro h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.description {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.social-links {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.social-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s ease;
+}
+
+.social-link:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.project-item {
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+    border: 1px solid var(--border);
+}
+
+.project-item:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+}
+
+.project-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+}
+
+.project-content {
+    padding: 1.5rem;
+}
+
+.project-content h2 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+.project-content .description {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.technologies {
+    margin: 1rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.tech-tag {
+    background: rgba(96, 165, 250, 0.1);
+    color: var(--accent);
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    border: 1px solid rgba(96, 165, 250, 0.2);
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.project-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+.project-link:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+.license {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.tech-details {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+}
+
+.tech-details h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.tech-item {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.tech-item h3 {
+    color: var(--accent);
+    margin: 0 0 0.75rem 0;
+    font-size: 1.25rem;
+}
+
+.tech-item p {
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.tech-link {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.tech-link:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .intro h1 {
+        font-size: 2rem;
+    }
+    
+    .projects-index {
+        padding: 1rem;
+    }
+
+    .tech-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style> 
