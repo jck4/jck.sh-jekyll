@@ -5,8 +5,8 @@ title: Projects
 
 <div class="projects-index">
     <div class="intro">
-        <h1>Projects</h1>
-        <p class="description">Software engineer. Building cool stuff.</p>
+
+        <p class="description">Platform and Software engineer who builds cool stuff.</p>
         <div class="social-links">
             {% if site.social.github %}
             <a href="https://github.com/{{ site.social.github }}" class="social-link">GitHub</a>
@@ -14,9 +14,28 @@ title: Projects
             {% if site.social.linkedin %}
             <a href="https://linkedin.com/in/{{ site.social.linkedin }}" class="social-link">LinkedIn</a>
             {% endif %}
+            {% if site.social.github %}
+            <a href="blog" class="social-link">Blog</a>
+            {% endif %}
         </div>
     </div>
 
+    <div class="blog-section">
+        <h2>Latest Blog Posts</h2>
+        <div class="blog-grid">
+            {% for post in site.posts limit:3 %}
+            <article class="blog-item">
+                <div class="blog-content">
+                    <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                    <p class="post-date">{{ post.date | date: "%B %d, %Y" }}</p>
+                    <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+                    <a href="{{ post.url | relative_url }}" class="read-more">Read More</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+    <h1>Latest Projects</h1>
     <div class="projects-grid">
         {% for project in site.projects %}
         <article class="project-item">
@@ -58,35 +77,58 @@ title: Projects
 
 <style>
 :root {
-    --bg-primary: #0f172a;
-    --bg-secondary: #1e293b;
-    --text-primary: #e2e8f0;
-    --text-secondary: #94a3b8;
-    --accent: #60a5fa;
-    --accent-hover: #3b82f6;
-    --border: #334155;
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #111111;
+    --text-primary: #00ff00;
+    --text-secondary: #00cc00;
+    --accent: #00ff00;
+    --accent-hover: #00cc00;
+    --border: #1a1a1a;
+    --terminal-green: #00ff00;
+    --terminal-dim: #003300;
 }
 
 body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
+    font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+    line-height: 1.6;
 }
 
 .projects-index {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
+    position: relative;
+}
+
+.projects-index::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--terminal-green), transparent);
+    opacity: 0.5;
 }
 
 .intro {
     text-align: center;
     margin-bottom: 3rem;
+    position: relative;
 }
 
 .intro h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
     color: var(--text-primary);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.intro h1::before {
+    content: "> ";
+    color: var(--terminal-dim);
 }
 
 .description {
@@ -95,6 +137,17 @@ body {
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.6;
+    position: relative;
+}
+
+.description::after {
+    content: "_";
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 .social-links {
@@ -108,12 +161,16 @@ body {
     color: var(--accent);
     text-decoration: none;
     font-size: 1rem;
-    transition: color 0.2s ease;
+    transition: all 0.2s ease;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--terminal-dim);
+    border-radius: 4px;
 }
 
 .social-link:hover {
     color: var(--accent-hover);
-    text-decoration: underline;
+    border-color: var(--terminal-green);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
 }
 
 .projects-grid {
@@ -192,16 +249,37 @@ body {
     color: var(--accent);
     text-decoration: none;
     font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--terminal-dim);
+    border-radius: 4px;
+    background: var(--bg-secondary);
+    transition: all 0.2s ease;
+    font-family: 'JetBrains Mono', monospace;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-link::before {
+    content: "> ";
+    color: var(--terminal-dim);
+    margin-right: 0.25rem;
 }
 
 .project-link:hover {
     color: var(--accent-hover);
-    text-decoration: underline;
+    border-color: var(--terminal-green);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+    transform: translateY(-1px);
 }
 
 .license {
     font-size: 0.875rem;
-    color: var(--text-secondary);
+    color: var(--terminal-dim);
+    font-family: 'JetBrains Mono', monospace;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--terminal-dim);
+    border-radius: 4px;
+    background: var(--bg-secondary);
 }
 
 .tech-details {
@@ -267,5 +345,145 @@ body {
     .tech-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* Blog Section Styles */
+.blog-section {
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+.blog-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: var(--text-primary);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.blog-section h2::before {
+    content: "> ";
+    color: var(--terminal-dim);
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.blog-item {
+    background: var(--bg-secondary);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid var(--terminal-dim);
+    position: relative;
+}
+
+.blog-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--terminal-green), transparent);
+    opacity: 0.5;
+}
+
+.blog-item:hover {
+    transform: translateY(-2px);
+    border-color: var(--terminal-green);
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
+}
+
+.blog-content {
+    padding: 1.5rem;
+}
+
+.blog-content h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+}
+
+.blog-content h3 a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.blog-content h3 a:hover {
+    color: var(--accent);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+.post-date {
+    color: var(--terminal-dim);
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.post-excerpt {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.read-more {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--terminal-dim);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.read-more:hover {
+    color: var(--accent-hover);
+    border-color: var(--terminal-green);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+/* Add a subtle scanline effect */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.1) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* Add a subtle CRT glow effect */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at center,
+        transparent 0%,
+        rgba(0, 255, 0, 0.03) 100%
+    );
+    pointer-events: none;
+    z-index: 999;
 }
 </style> 

@@ -1,6 +1,4 @@
----
----
-
+@import "fonts";
 @import "variables";
 @import "base";
 @import "layout";
@@ -109,20 +107,29 @@ h1, h2, h3 {
 h1 {
     font-size: 3rem;
     letter-spacing: -0.02em;
-    background: linear-gradient(90deg, $gradient-start, $gradient-end);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 200% auto;
-    animation: gradientFlow 5s ease infinite;
+    color: var(--terminal-green);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    position: relative;
+    display: inline-block;
+    margin-bottom: 2rem;
+}
+
+h1::before {
+    content: "> ";
+    color: var(--terminal-dim);
+    font-family: 'JetBrains Mono', monospace;
 }
 
 h2 {
     font-size: 1.8rem;
     letter-spacing: -0.01em;
+    color: var(--terminal-green);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
 }
 
 h3 {
     font-size: 1.4rem;
+    color: var(--terminal-green);
 }
 
 // Projects page styles

@@ -22,7 +22,7 @@ RUN bundle install
 COPY . .
 
 # Expose ports for Jekyll and LiveReload
-EXPOSE 4000
+EXPOSE 3000
 EXPOSE 35729
 
 # Start Jekyll server with LiveReload

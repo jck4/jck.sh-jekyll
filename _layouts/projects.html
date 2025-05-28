@@ -1,0 +1,208 @@
+---
+layout: default
+---
+
+<div class="projects-index">
+    <header class="projects-header">
+        <div class="projects-title">
+            <span class="prompt">$</span>
+            <h1>Projects</h1>
+        </div>
+        <p class="projects-description">A collection of my software and infrastructure projects.</p>
+    </header>
+
+    <div class="projects-grid">
+        {% for project in site.projects %}
+        <article class="project-item">
+            {% if project.image %}
+            <div class="project-image">
+                <img src="{{ project.image | relative_url }}" alt="{{ project.title }}">
+            </div>
+            {% endif %}
+            
+            <div class="project-content">
+                <h2>{{ project.title }}</h2>
+                <p class="description">{{ project.description }}</p>
+                
+                {% if project.technologies %}
+                <div class="technologies">
+                    <span class="prompt">></span> Technologies: {% for tech in project.technologies %}
+                    <span class="tech-tag">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <div class="project-links">
+                    {% if project.github_url %}
+                    <a href="{{ project.github_url }}" class="project-link">View on GitHub</a>
+                    {% endif %}
+                    {% if project.live_url %}
+                    <a href="{{ project.live_url }}" class="project-link">View Live</a>
+                    {% endif %}
+                    {% if project.license %}
+                    <span class="license">{{ project.license }} License</span>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.projects-index {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+}
+
+.projects-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.projects-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.projects-title h1 {
+    margin: 0;
+    color: var(--terminal-green);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.projects-description {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.project-item {
+    background: var(--bg-secondary);
+    border: 1px solid var(--terminal-dim);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.project-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--terminal-green), transparent);
+    opacity: 0.5;
+}
+
+.project-item:hover {
+    transform: translateY(-2px);
+    border-color: var(--terminal-green);
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
+}
+
+.project-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+}
+
+.project-content {
+    padding: 1.5rem;
+}
+
+.project-content h2 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+.project-content .description {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.technologies {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+    color: var(--text-secondary);
+}
+
+.tech-tag {
+    color: var(--accent);
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    border: 1px solid var(--terminal-dim);
+    background: var(--bg-secondary);
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.project-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--terminal-dim);
+    border-radius: 4px;
+    background: var(--bg-secondary);
+    transition: all 0.2s ease;
+}
+
+.project-link:hover {
+    color: var(--accent-hover);
+    border-color: var(--terminal-green);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+.license {
+    font-size: 0.875rem;
+    color: var(--terminal-dim);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--terminal-dim);
+    border-radius: 4px;
+    background: var(--bg-secondary);
+}
+
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .projects-index {
+        padding: 1rem;
+    }
+}
+</style> 

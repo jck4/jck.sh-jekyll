@@ -1,13 +1,13 @@
 # Personal Website
 
-This is my personal website built with Jekyll. It showcases my projects, skills, and experience in cybersecurity and software engineering.
+This is my personal website built with Jekyll. It showcases my projects, skills, and experience in cybersecurity and software engineering, and also some blogposts.
 
 ## Setup with Docker
 
 1. Make sure you have Docker and Docker Compose installed
 2. Clone this repository
 3. Run `docker-compose up --build`
-4. Visit `http://localhost:4000` to view the site
+4. Visit `http://localhost:3000` to view the site
 
 The site will automatically rebuild when you make changes to the source files.
 
@@ -26,7 +26,7 @@ If you prefer to run without Docker:
 2. Clone this repository
 3. Run `bundle install` to install dependencies
 4. Run `bundle exec jekyll serve` to start the development server
-5. Visit `http://localhost:4000` to view the site
+5. Visit `http://localhost:3000` to view the site
 
 ## License
 
