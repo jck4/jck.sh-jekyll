@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  jekyll:
+    build: .
+    ports:
+      - "3000:3000"
+      - "35729:35729"  # LiveReload port
+    volumes:
+      - .:/srv/jekyll
+      - /srv/jekyll/vendor/bundle
+      - /srv/jekyll/.jekyll-cache
+      - /srv/jekyll/.sass-cache
+    environment:
+      - JEKYLL_ENV=development
+      - LIVERELOAD_PORT=35729
+    command: bundle exec jekyll serve --host 0.0.0.0 --livereload --livereload-port 35729 --force_polling 

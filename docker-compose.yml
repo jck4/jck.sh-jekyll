@@ -3,15 +3,22 @@ version: '3.8'
 services:
   jekyll:
     build: .
+    image: jck-site:latest
+    container_name: jck-site
+    restart: unless-stopped
     ports:
-      - "4000:4000"
-      - "35729:35729"  # LiveReload port
+      - "3000:3000"
     volumes:
-      - .:/srv/jekyll
-      - /srv/jekyll/vendor/bundle
-      - /srv/jekyll/.jekyll-cache
-      - /srv/jekyll/.sass-cache
+      - .:/srv/jekyll:ro
+      - jekyll-vendor:/srv/jekyll/vendor/bundle
+      - jekyll-cache:/srv/jekyll/.jekyll-cache
+      - jekyll-sass:/srv/jekyll/.sass-cache
     environment:
-      - JEKYLL_ENV=development
-      - LIVERELOAD_PORT=35729
-    command: bundle exec jekyll serve --host 0.0.0.0 --livereload --livereload-port 35729 --force_polling 
+      - JEKYLL_ENV=production
+      - JEKYLL_SERVE_PORT=3000
+    command: bundle exec jekyll serve --host 0.0.0.0 --port 3000 --incremental
+
+volumes:
+  jekyll-vendor:
+  jekyll-cache:
+  jekyll-sass: 
