@@ -3,8 +3,6 @@ version: '3.8'
 services:
   jekyll:
     build: .
-    image: jck-site:latest
-    container_name: jck-site
     restart: unless-stopped
     ports:
       - "3000:3000"
