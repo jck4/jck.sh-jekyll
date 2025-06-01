@@ -1,0 +1,104 @@
+---
+layout: default
+title: 404 - Page Not Found
+---
+
+<div class="error-page">
+    <div class="error-content">
+        <div class="error-title">
+            <span class="prompt">$</span>
+            <h1>404</h1>
+        </div>
+        <div class="error-message">
+            <span class="prompt">></span>
+            <p>Page not found. The requested URL was not found on this server.</p>
+        </div>
+        <div class="error-suggestions">
+            <span class="prompt">></span>
+            <p>Try these commands:</p>
+            <ul>
+                <li><a href="/">cd /</a> - Go to homepage</li>
+                <li><a href="/projects">cd /projects</a> - View projects</li>
+                <li><a href="/blog">cd /blog</a> - Read blog posts</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<style>
+.error-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-content {
+    background: var(--bg-secondary);
+    border: 1px solid var(--terminal-dim);
+    border-radius: 4px;
+    padding: 2rem;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+}
+
+.error-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.error-title h1 {
+    margin: 0;
+    font-size: 3rem;
+    color: var(--terminal-green);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.error-message {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
+}
+
+.error-suggestions {
+    display: flex;
+    gap: 1rem;
+    color: var(--text-secondary);
+}
+
+.error-suggestions ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0 0;
+}
+
+.error-suggestions li {
+    margin-bottom: 0.5rem;
+}
+
+.error-suggestions a {
+    color: var(--accent);
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--terminal-dim);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.error-suggestions a:hover {
+    color: var(--accent-hover);
+    border-color: var(--terminal-green);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+.prompt {
+    color: var(--terminal-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: bold;
+}
+</style> 

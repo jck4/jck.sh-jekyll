@@ -1,6 +1,6 @@
 ---
 title: Path of Inventory
-description: A Python-based inventory management tool for Path of Exile that uses mathematical calculations and the official Path of Exile API to automate item organization.
+description: A Python-based inventory management tool for Path of Exile that uses mathematical calculations and the official Path of Exile API to automate item organization
 technologies: [Python, PyQt, Path of Exile API]
 github_url: https://github.com/jck4/pathofinventory
 image: /assets/images/projects/pathofinventory.png

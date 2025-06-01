@@ -1,6 +1,6 @@
 ---
 title: ClutterChat
-description: A Twitter-like social platform built with Ruby on Rails backend and Node.js WebSocket server for real-time messaging.
+description: A Twitter-like social platform built with Ruby on Rails backend and Node.js WebSocket server for real-time messaging
 technologies: [Ruby on Rails, Node.js, WebSocket, PostgreSQL, Redis]
 github_url: https://github.com/jck4/clutterchat
 image: /assets/images/projects/clutterchat.png
@@ -16,7 +16,5 @@ A Twitter-inspired social platform that combines the robustness of Ruby on Rails
 * Redis for session management and caching
 * Real-time notifications and message delivery
 * User authentication and authorization
-* Tweet-like post creation and interaction
+* Tweet-like post creation and interaction via discord oauth
 * Real-time feed updates
-* User following system
-* Hashtag support and trending topics 

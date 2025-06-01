@@ -13,6 +13,22 @@ markdown: kramdown
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
+
+# SEO settings
+seo:
+  title: "jck - Cybersecurity Specialist & Software Engineer"
+  description: "Personal website of jck, a Cybersecurity Specialist and Software Engineer. Explore projects, blog posts, and professional experience."
+  image: "/assets/images/og-image.jpg"
+  twitter:
+    username: jck4
+    card: summary_large_image
+  open_graph:
+    locale: en_US
+    type: website
+    site_name: jck.sh
+  canonical_url: true
+  json_ld: true
 
 # Collections
 collections:
@@ -32,6 +48,14 @@ defaults:
       type: "pages"
     values:
       layout: "default"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: jck
+      share: true
+      comments: false
 
 # Permalinks
 permalink: pretty

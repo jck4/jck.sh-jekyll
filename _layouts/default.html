@@ -7,7 +7,7 @@
     <meta name="description" content="{{ site.description }}">
     <meta name="author" content="{{ site.title }}">
     
-    <title>{{ page.title }} - {{ site.title }}</title>
+    <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }} - {{ site.description }}{% endif %}</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="{{ '/assets/favicon.svg' | relative_url }}">
@@ -19,6 +19,31 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    
+    <!-- SEO Tags -->
+    {% seo %}
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "{% if page.layout == 'post' %}BlogPosting{% else %}WebSite{% endif %}",
+        "url": "{{ page.url | absolute_url }}",
+        "name": "{{ page.title | default: site.title }}",
+        "description": "{{ page.description | default: site.description }}",
+        {% if page.layout == 'post' %}
+        "datePublished": "{{ page.date | date_to_xmlschema }}",
+        "author": {
+            "@type": "Person",
+            "name": "{{ page.author | default: site.title }}"
+        },
+        {% endif %}
+        "publisher": {
+            "@type": "Person",
+            "name": "{{ site.title }}"
+        }
+    }
+    </script>
     
     <style>
         :root {
@@ -83,8 +108,6 @@
             z-index: 999;
         }
     </style>
-    
-    {% seo %}
 </head>
 <body>
     <main>
