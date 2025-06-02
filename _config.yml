@@ -15,6 +15,19 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
 
+# Exclude files from processing
+exclude:
+  - Dockerfile
+  - docker-compose.yml
+  - compose-dev.yml
+  - README.md
+  - .git
+  - .gitignore
+  - node_modules
+  - vendor
+  - Gemfile
+  - Gemfile.lock
+
 # SEO settings
 seo:
   title: "jck - Cybersecurity Specialist & Software Engineer"
