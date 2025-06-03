@@ -31,9 +31,9 @@ jobs:
 
       - name: Deploy to S3
         run: |
-          aws s3 sync _site/ s3://jck.sh-site --delete
+          aws s3 sync _site/ s3://jck.sh --delete
           
           # Configure bucket for static website hosting
-          aws s3 website s3://jck.sh-site \
+          aws s3 website s3://jck.sh \
             --index-document index.html \
             --error-document 404.html
