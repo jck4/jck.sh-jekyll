@@ -682,9 +682,13 @@ async function fetchCostData() {
             `).join('');
 
         // Update timestamp using the date from the JSON response
-        const date = new Date(data.date);
+        console.log('Raw date from JSON:', data.date);
+        const date = new Date(data.date + 'T00:00:00Z');  // Ensure UTC date handling
+        console.log('Parsed date:', date);
+        const formattedDate = date.toLocaleDateString('en-US', { timeZone: 'UTC' });
+        console.log('UTC date string:', formattedDate);
         document.getElementById('cost-timestamp').textContent = 
-            `Last updated: ${date.toLocaleDateString()} 9:00 AM`;
+            `Last updated: ${formattedDate} 9:00 AM`;
     } catch (error) {
         console.error('Error fetching cost data:', error);
         document.getElementById('cost-timestamp').textContent = 'Error loading cost data';
