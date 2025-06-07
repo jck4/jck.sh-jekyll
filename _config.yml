@@ -50,7 +50,7 @@ collections:
     permalink: /projects/:title/
   posts:
     output: true
-    permalink: /:year/:month/:day/:title/
+    permalink: /blog/:title.html
 
 # Default front matter
 defaults:
@@ -74,7 +74,7 @@ defaults:
       comments: false
 
 # Permalinks
-permalink: /:year/:month/:day/:title/
+permalink: /blog/:title.html
 
 # Redirects
 redirects:
