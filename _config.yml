@@ -30,7 +30,7 @@ exclude:
 
 # SEO settings
 seo:
-  title: "jck - Cybersecurity Specialist & Software Engineer"
+  title: "jck - Software Engineer and Hacker"
   description: "Personal website of jck, a Cybersecurity Specialist and Software Engineer. Explore projects, blog posts, and professional experience."
   image: "/assets/images/og-image.jpg"
   twitter:
@@ -48,6 +48,9 @@ collections:
   projects:
     output: true
     permalink: /projects/:title/
+  posts:
+    output: true
+    permalink: /:year/:month/:day/:title/
 
 # Default front matter
 defaults:
@@ -71,11 +74,12 @@ defaults:
       comments: false
 
 # Permalinks
-permalink: pretty
+permalink: /:year/:month/:day/:title/
 
 # Redirects
 redirects:
   /: /projects/
+  /blog/:title/: /:year/:month/:day/:title/
 
 # Sass settings
 sass:
