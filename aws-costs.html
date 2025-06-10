@@ -1,0 +1,295 @@
+---
+layout: default
+title: Cloud Cost Dashboard
+---
+
+<div class="cost-dashboard-container">
+    <div class="cost-dashboard">
+        <h2>AWS Cost Dashboard</h2>
+        <div class="cost-grid">
+            <div class="cost-card">
+                <h3>Yesterday's Cost</h3>
+                <div class="cost-value" id="aws-yesterday-cost">Loading...</div>
+                <div class="cost-breakdown" id="aws-yesterday-breakdown"></div>
+            </div>
+            <div class="cost-card">
+                <h3>Month to Date</h3>
+                <div class="cost-value" id="aws-month-cost">Loading...</div>
+                <div class="cost-breakdown" id="aws-month-breakdown"></div>
+            </div>
+        </div>
+        <div class="cost-footer">
+            <span class="cost-timestamp" id="aws-cost-timestamp">Last updated: Loading...</span>
+            <button class="refresh-button" onclick="fetchAWSCostData()">Refresh</button>
+        </div>
+    </div>
+
+    <div class="cost-dashboard" style="margin-top: 2rem;">
+        <h2>GCP Cost Dashboard</h2>
+        <div class="cost-grid">
+            <div class="cost-card">
+                <h3>Yesterday's Cost</h3>
+                <div class="cost-value" id="gcp-yesterday-cost">Loading...</div>
+                <div class="cost-breakdown" id="gcp-yesterday-breakdown"></div>
+            </div>
+            <div class="cost-card">
+                <h3>Month to Date</h3>
+                <div class="cost-value" id="gcp-month-cost">Loading...</div>
+                <div class="cost-breakdown" id="gcp-month-breakdown"></div>
+            </div>
+        </div>
+        <div class="cost-footer">
+            <span class="cost-timestamp" id="gcp-cost-timestamp">Last updated: Loading...</span>
+            <button class="refresh-button" onclick="fetchGCPCostData()">Refresh</button>
+        </div>
+    </div>
+</div>
+
+<style>
+:root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #111111;
+    --text-primary: #00ff00;
+    --text-secondary: #00cc00;
+    --accent: #00ff00;
+    --accent-hover: #00cc00;
+    --border: #1a1a1a;
+    --terminal-green: #00ff00;
+    --terminal-dim: #003300;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+    line-height: 1.6;
+}
+
+.cost-dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.cost-dashboard {
+    background: var(--bg-secondary);
+    border: 1px solid var(--terminal-dim);
+    border-radius: 8px;
+    padding: 1.5rem;
+    position: relative;
+}
+
+.cost-dashboard h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.cost-dashboard h2::before {
+    content: "> ";
+    color: var(--terminal-dim);
+}
+
+.cost-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.cost-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--terminal-dim);
+    border-radius: 4px;
+    padding: 1.25rem;
+}
+
+.cost-card h3 {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin: 0 0 0.75rem 0;
+}
+
+.cost-value {
+    font-size: 2rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.cost-breakdown {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.cost-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--terminal-dim);
+}
+
+.cost-item span {
+    color: var(--text-primary);
+}
+
+.cost-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.cost-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--terminal-dim);
+}
+
+.cost-timestamp {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.refresh-button {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1px solid var(--terminal-dim);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    transition: all 0.2s ease;
+}
+
+.refresh-button:hover {
+    border-color: var(--terminal-green);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .cost-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Add a subtle scanline effect */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.1),
+        rgba(0, 0, 0, 0.1) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* Add a subtle CRT glow effect */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at center,
+        transparent 0%,
+        rgba(0, 255, 0, 0.03) 100%
+    );
+    pointer-events: none;
+    z-index: 999;
+}
+</style>
+
+<script>
+async function fetchAWSCostData() {
+    try {
+        console.log('Fetching AWS cost data...');
+        const response = await fetch('https://jck.sh/aws-costs/latest.json', {
+            mode: 'cors',
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log('Received AWS data:', data);
+        
+        // Update yesterday's costs
+        document.getElementById('aws-yesterday-cost').textContent = `$${data.yesterday_total_usd.toFixed(4)}`;
+        
+        // Update month to date costs
+        document.getElementById('aws-month-cost').textContent = `$${data.month_to_date_total_usd.toFixed(4)}`;
+
+        // Update timestamp
+        const today = new Date();
+        today.setHours(9, 0, 0, 0);  // Set to 9 AM
+        const formattedDate = today.toLocaleDateString('en-US', { timeZone: 'UTC' });
+        document.getElementById('aws-cost-timestamp').textContent = 
+            `Last updated: ${formattedDate} 9:00 AM`;
+    } catch (error) {
+        console.error('Error fetching AWS cost data:', error);
+        document.getElementById('aws-cost-timestamp').textContent = 'Error loading cost data';
+        document.getElementById('aws-yesterday-cost').textContent = 'Error';
+        document.getElementById('aws-month-cost').textContent = 'Error';
+    }
+}
+
+async function fetchGCPCostData() {
+    try {
+        console.log('Fetching GCP cost data...');
+        const response = await fetch('https://jck.sh/gcp-costs/latest.json', {
+            mode: 'cors',
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log('Received GCP data:', data);
+        
+        // Update yesterday's costs
+        document.getElementById('gcp-yesterday-cost').textContent = `$${data.yesterday_total_usd.toFixed(4)}`;
+        
+        // Update month to date costs
+        document.getElementById('gcp-month-cost').textContent = `$${data.month_to_date_total_usd.toFixed(4)}`;
+
+        // Update timestamp
+        const today = new Date();
+        today.setHours(9, 0, 0, 0);  // Set to 9 AM
+        const formattedDate = today.toLocaleDateString('en-US', { timeZone: 'UTC' });
+        document.getElementById('gcp-cost-timestamp').textContent = 
+            `Last updated: ${formattedDate} 9:00 AM`;
+    } catch (error) {
+        console.error('Error fetching GCP cost data:', error);
+        document.getElementById('gcp-cost-timestamp').textContent = 'Error loading cost data';
+        document.getElementById('gcp-yesterday-cost').textContent = 'Error';
+        document.getElementById('gcp-month-cost').textContent = 'Error';
+    }
+}
+
+// Fetch cost data when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Page loaded, fetching cost data...');
+    fetchAWSCostData();
+    fetchGCPCostData();
+});
+</script> 

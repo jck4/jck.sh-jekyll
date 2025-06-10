@@ -5,7 +5,6 @@ title: Projects
 
 <div class="projects-index">
     <div class="intro">
-
         <p class="description"> Software & Cybersecurity Engineer who builds cool stuff</p>
         <div class="social-links">
             {% if site.social.github %}
@@ -17,26 +16,7 @@ title: Projects
             {% if site.social.github %}
             <a href="blog" class="social-link">Blog</a>
             {% endif %}
-        </div>
-    </div>
-
-    <div class="cost-dashboard">
-        <h2>AWS Cost Dashboard</h2>
-        <div class="cost-grid">
-            <div class="cost-card">
-                <h3>Yesterday's Cost</h3>
-                <div class="cost-value" id="yesterday-cost">Loading...</div>
-                <div class="cost-breakdown" id="yesterday-breakdown"></div>
-            </div>
-            <div class="cost-card">
-                <h3>Month to Date</h3>
-                <div class="cost-value" id="month-cost">Loading...</div>
-                <div class="cost-breakdown" id="month-breakdown"></div>
-            </div>
-        </div>
-        <div class="cost-footer">
-            <span class="cost-timestamp" id="cost-timestamp">Last updated: Loading...</span>
-            <button class="refresh-button" onclick="fetchCostData()">Refresh</button>
+            <a href="aws-costs" class="social-link">Cloud Costs</a>
         </div>
     </div>
 
@@ -92,7 +72,6 @@ title: Projects
         </article>
         {% endfor %}
     </div>
-
 </div>
 
 <style>
