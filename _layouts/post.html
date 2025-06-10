@@ -182,4 +182,30 @@ layout: default
     border-color: var(--terminal-green);
     box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
 }
-</style> 
+</style>
+
+<!-- Styles -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!-- SEO Tags -->
+{% seo %}
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "url": "{{ page.url | absolute_url }}",
+    "name": "{{ page.title }}",
+    "description": "{{ page.excerpt | strip_html | truncatewords: 30 }}",
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "author": {
+        "@type": "Person",
+        "name": "{{ site.author }}"
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "{{ site.author }}"
+    }
+}
+</script> 
