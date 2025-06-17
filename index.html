@@ -5,24 +5,15 @@ title: Projects
 
 <div class="projects-index">
     <div class="intro">
-        <p class="description"> Software & Cybersecurity Engineer who builds cool stuff</p>
-        <div class="social-links">
-            {% if site.social.github %}
-            <a href="https://github.com/{{ site.social.github }}" class="social-link">GitHub</a>
-            {% endif %}
-            {% if site.social.linkedin %}
-            <a href="https://linkedin.com/in/{{ site.social.linkedin }}" class="social-link">LinkedIn</a>
-            {% endif %}
-            {% if site.social.github %}
-            <a href="blog" class="social-link">Blog</a>
-            {% endif %}
-        </div>
+        <p class="description">Software & Cybersecurity Engineer who builds cool stuff</p>
     </div>
 
+    <div class="section-divider"></div>
+
     <div class="blog-section">
-        <h2>Latest Blog Posts</h2>
+        <h2 class="section-title">Latest Blog Posts</h2>
         <div class="blog-grid">
-            {% for post in site.posts limit:3 %}
+            {% for post in site.posts %}
             <article class="blog-item">
                 <div class="blog-content">
                     <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
@@ -34,141 +25,93 @@ title: Projects
             {% endfor %}
         </div>
     </div>
-    <h1 class="section-title">Latest Projects</h1>
-    <div class="projects-grid">
-        {% for project in site.projects %}
-        <article class="project-item">
-            {% if project.image %}
-            <div class="project-image">
-                <img src="{{ project.image | relative_url }}" alt="{{ project.title }}">
-            </div>
-            {% endif %}
-            
-            <div class="project-content">
-                <h2>{{ project.title }}</h2>
-                <p class="description">{{ project.description }}</p>
-                
-                {% if project.technologies %}
-                <div class="technologies">
-                    {% for tech in project.technologies %}
-                    <span class="tech-tag">{{ tech }}</span>
-                    {% endfor %}
+
+    <div class="section-divider"></div>
+
+    <div class="projects-section">
+        <h2 class="section-title">Latest Projects</h2>
+        <div class="projects-grid">
+            {% for project in site.projects limit:6 %}
+            <article class="project-item">
+                {% if project.image %}
+                <div class="project-image">
+                    <img src="{{ project.image | relative_url }}" alt="{{ project.title }}">
                 </div>
                 {% endif %}
                 
-                <div class="project-links">
-                    {% if project.github_url %}
-                    <a href="{{ project.github_url }}" class="project-link">View on GitHub</a>
+                <div class="project-content">
+                    <h2>{{ project.title }}</h2>
+                    <p class="description">{{ project.description }}</p>
+                    
+                    {% if project.technologies %}
+                    <div class="technologies">
+                        Technologies: {% for tech in project.technologies %}
+                        <span class="tech-tag">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
                     {% endif %}
-                    {% if project.live_url %}
-                    <a href="{{ project.live_url }}" class="project-link">View Live</a>
-                    {% endif %}
-                    {% if project.license %}
-                    <span class="license">{{ project.license }} License</span>
-                    {% endif %}
+                    
+                    <div class="project-links">
+                        {% if project.github_url %}
+                        <a href="{{ project.github_url }}" class="project-link">View on GitHub</a>
+                        {% endif %}
+                        {% if project.live_url %}
+                        <a href="{{ project.live_url }}" class="project-link">View Live</a>
+                        {% endif %}
+                        {% if project.license %}
+                        <span class="license">{{ project.license }} License</span>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-        </article>
-        {% endfor %}
+            </article>
+            {% endfor %}
+        </div>
     </div>
 </div>
 
 <style>
-:root {
-    --bg-primary: #0a0a0a;
-    --bg-secondary: #111111;
-    --text-primary: #00ff00;
-    --text-secondary: #00cc00;
-    --accent: #00ff00;
-    --accent-hover: #00cc00;
-    --border: #1a1a1a;
-    --terminal-green: #00ff00;
-    --terminal-dim: #003300;
-}
-
-body {
-    background-color: var(--bg-primary);
-    color: var(--text-primary);
-    font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
-    line-height: 1.6;
-}
-
 .projects-index {
     max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
-    position: relative;
-}
-
-.projects-index::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--terminal-green), transparent);
-    opacity: 0.5;
 }
 
 .intro {
     text-align: center;
-    margin-bottom: 3rem;
-    position: relative;
-}
-
-.intro h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: var(--text-primary);
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
-}
-
-.intro h1::before {
-    content: "> ";
-    color: var(--terminal-dim);
+    margin-bottom: 4rem;
+    padding: 2rem 0;
 }
 
 .description {
+    font-size: 1.5rem;
     color: var(--text-secondary);
-    font-size: 1.1rem;
     max-width: 600px;
     margin: 0 auto;
     line-height: 1.6;
-    position: relative;
-}
-
-.description::after {
-    content: "_";
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
 }
 
 .social-links {
-    margin-top: 1.5rem;
     display: flex;
     gap: 1.5rem;
     justify-content: center;
+    align-items: center;
 }
 
 .social-link {
     color: var(--accent);
     text-decoration: none;
     font-size: 1rem;
-    transition: all 0.2s ease;
+    font-weight: 500;
     padding: 0.5rem 1rem;
-    border: 1px solid var(--terminal-dim);
+    border: 1px solid var(--border);
     border-radius: 4px;
+    transition: all 0.2s ease;
 }
 
 .social-link:hover {
-    color: var(--accent-hover);
-    border-color: var(--terminal-green);
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+    color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .projects-grid {
@@ -181,9 +124,12 @@ body {
     background: var(--bg-secondary);
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease;
     border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .project-item:hover {
@@ -201,46 +147,48 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.9;
 }
 
 .project-content {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .project-content h2 {
-    margin: 0 0 0.75rem 0;
-    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
     color: var(--text-primary);
 }
 
 .project-content .description {
     color: var(--text-secondary);
-    margin-bottom: 1rem;
-    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
 }
 
 .technologies {
-    margin: 1rem 0;
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .tech-tag {
-    background: rgba(96, 165, 250, 0.1);
-    color: var(--accent);
+    background: var(--bg-primary);
+    color: var(--text-secondary);
     padding: 0.25rem 0.75rem;
     border-radius: 4px;
     font-size: 0.875rem;
-    border: 1px solid rgba(96, 165, 250, 0.2);
+    border: 1px solid var(--border);
 }
 
 .project-links {
     display: flex;
     gap: 1rem;
     align-items: center;
-    margin-top: 1rem;
+    margin-top: auto;
+    flex-wrap: wrap;
 }
 
 .project-link {
@@ -248,200 +196,130 @@ body {
     text-decoration: none;
     font-size: 0.875rem;
     padding: 0.5rem 1rem;
-    border: 1px solid var(--terminal-dim);
+    border: 1px solid var(--border);
     border-radius: 4px;
     background: var(--bg-secondary);
     transition: all 0.2s ease;
-    font-family: 'JetBrains Mono', monospace;
-    position: relative;
-    overflow: hidden;
-}
-
-.project-link::before {
-    content: "> ";
-    color: var(--terminal-dim);
-    margin-right: 0.25rem;
 }
 
 .project-link:hover {
-    color: var(--accent-hover);
-    border-color: var(--terminal-green);
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
-    transform: translateY(-1px);
+    color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .license {
     font-size: 0.875rem;
-    color: var(--terminal-dim);
-    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-secondary);
     padding: 0.5rem 1rem;
-    border: 1px solid var(--terminal-dim);
+    border: 1px solid var(--border);
     border-radius: 4px;
     background: var(--bg-secondary);
 }
 
-.tech-details {
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-}
-
-.tech-details h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--text-primary);
-}
-
-.tech-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-}
-
-.tech-item {
-    background: var(--bg-secondary);
-    padding: 1.5rem;
-    border-radius: 8px;
-    border: 1px solid var(--border);
-}
-
-.tech-item h3 {
-    color: var(--accent);
-    margin: 0 0 0.75rem 0;
-    font-size: 1.25rem;
-}
-
-.tech-item p {
-    color: var(--text-secondary);
-    margin: 0;
-    line-height: 1.6;
-}
-
-.tech-link {
-    color: var(--accent);
-    text-decoration: none;
-}
-
-.tech-link:hover {
-    color: var(--accent-hover);
-    text-decoration: underline;
-}
-
-@media (max-width: 768px) {
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .intro h1 {
-        font-size: 2rem;
-    }
-    
-    .projects-index {
-        padding: 1rem;
-    }
-
-    .tech-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Blog Section Styles */
 .blog-section {
     margin-bottom: 4rem;
+}
+
+.section-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 4rem 0;
     position: relative;
 }
 
-.blog-section h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 2rem;
-    color: var(--text-primary);
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+.section-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 1px;
+    background: var(--accent);
 }
 
-.blog-section h2::before {
-    content: "> ";
-    color: var(--terminal-dim);
+.projects-section {
+    margin-top: 4rem;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--text-primary);
+    font-size: 2rem;
 }
 
 .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .blog-item {
     background: var(--bg-secondary);
-    border-radius: 4px;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
-    transition: all 0.3s ease;
-    border: 1px solid var(--terminal-dim);
-    position: relative;
-}
-
-.blog-item::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--terminal-green), transparent);
-    opacity: 0.5;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .blog-item:hover {
     transform: translateY(-2px);
-    border-color: var(--terminal-green);
-    box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
+    border-color: var(--accent);
 }
 
 .blog-content {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .blog-content h3 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.25rem;
+    margin: 0 0 0.75rem 0;
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
 }
 
 .blog-content h3 a {
     color: var(--text-primary);
     text-decoration: none;
     transition: all 0.2s ease;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .blog-content h3 a:hover {
     color: var(--accent);
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
 }
 
 .post-date {
     color: var(--text-secondary);
     font-size: 0.875rem;
-    margin-bottom: 0.75rem;
-    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 1rem;
+    min-height: 1.25rem;
 }
 
 .post-excerpt {
     color: var(--text-secondary);
     font-size: 0.95rem;
     line-height: 1.5;
-    margin-bottom: 1rem;
-}
-
-.post-excerpt a {
-    color: #ffffff;
-    text-decoration: none;
-    border-bottom: 1px solid var(--terminal-dim);
-    transition: all 0.2s ease;
-}
-
-.post-excerpt a:hover {
-    color: #ffffff;
-    border-color: var(--terminal-green);
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .read-more {
@@ -451,173 +329,28 @@ body {
     font-weight: 500;
     display: inline-block;
     padding: 0.5rem 1rem;
-    border: 1px solid var(--terminal-dim);
+    border: 1px solid var(--border);
     border-radius: 4px;
     transition: all 0.2s ease;
+    margin-top: auto;
+    width: fit-content;
 }
 
 .read-more:hover {
-    color: var(--accent-hover);
-    border-color: var(--terminal-green);
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
-}
-
-/* Add a subtle scanline effect */
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: repeating-linear-gradient(
-        0deg,
-        rgba(0, 0, 0, 0.1),
-        rgba(0, 0, 0, 0.1) 1px,
-        transparent 1px,
-        transparent 2px
-    );
-    pointer-events: none;
-    z-index: 1000;
-}
-
-/* Add a subtle CRT glow effect */
-body::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-        circle at center,
-        transparent 0%,
-        rgba(0, 255, 0, 0.03) 100%
-    );
-    pointer-events: none;
-    z-index: 999;
-}
-
-/* Cost Dashboard Styles */
-.cost-dashboard {
-    background: var(--bg-secondary);
-    border: 1px solid var(--terminal-dim);
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 3rem;
-    position: relative;
-}
-
-.cost-dashboard h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    color: var(--text-primary);
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
-}
-
-.cost-dashboard h2::before {
-    content: "> ";
-    color: var(--terminal-dim);
-}
-
-.cost-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-}
-
-.cost-card {
-    background: var(--bg-primary);
-    border: 1px solid var(--terminal-dim);
-    border-radius: 4px;
-    padding: 1.25rem;
-}
-
-.cost-card h3 {
-    color: var(--text-secondary);
-    font-size: 1rem;
-    margin: 0 0 0.75rem 0;
-}
-
-.cost-value {
-    font-size: 2rem;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-    font-family: 'JetBrains Mono', monospace;
-}
-
-.cost-breakdown {
-    font-size: 0.875rem;
-    color: var(--text-secondary);
-}
-
-.cost-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--terminal-dim);
-}
-
-.cost-item span {
-    color: var(--text-primary);
-}
-
-.cost-item:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-    padding-bottom: 0;
-}
-
-.cost-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--terminal-dim);
-}
-
-.cost-timestamp {
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-    font-family: 'JetBrains Mono', monospace;
-}
-
-.refresh-button {
-    background: var(--bg-primary);
-    color: var(--text-primary);
-    border: 1px solid var(--terminal-dim);
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: 'JetBrains Mono', monospace;
-    transition: all 0.2s ease;
-}
-
-.refresh-button:hover {
-    border-color: var(--terminal-green);
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+    color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 @media (max-width: 768px) {
-    .cost-grid {
+    .projects-grid,
+    .blog-grid {
         grid-template-columns: 1fr;
     }
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 2rem;
-    color: var(--text-primary);
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
-}
-
-.section-title::before {
-    content: "> ";
-    color: var(--terminal-dim);
+    
+    .projects-index {
+        padding: 1rem;
+    }
 }
 </style>
 

@@ -4,16 +4,15 @@ layout: default
 <article class="post">
     <header class="post-header">
         <div class="post-title">
-            <span class="prompt">$</span>
             <h1>{{ page.title }}</h1>
         </div>
         <div class="post-meta">
             <time datetime="{{ page.date | date_to_xmlschema }}" class="timestamp">
-                <span class="prompt">></span> {{ page.date | date: "%B %d, %Y" }}
+                {{ page.date | date: "%B %d, %Y" }}
             </time>
             {% if page.categories.size > 0 %}
             <span class="categories">
-                <span class="prompt">></span> Categories: {% for category in page.categories %}
+                Categories: {% for category in page.categories %}
                 <a href="{{ '/blog/categories/' | relative_url }}{{ category | slugify }}" class="category-link">{{ category }}</a>
                 {% unless forloop.last %}, {% endunless %}
                 {% endfor %}
@@ -29,7 +28,7 @@ layout: default
     <footer class="post-footer">
         {% if page.tags.size > 0 %}
         <div class="post-tags">
-            <span class="prompt">></span> Tags: {% for tag in page.tags %}
+            Tags: {% for tag in page.tags %}
             <a href="{{ '/blog/tags/' | relative_url }}{{ tag | slugify }}" class="tag">#{{ tag }}</a>
             {% endfor %}
         </div>
@@ -43,39 +42,30 @@ layout: default
     margin: 0 auto;
     padding: 2rem;
     background: var(--bg-secondary);
-    border: 1px solid var(--terminal-dim);
-    border-radius: 4px;
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .post-header {
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid var(--terminal-dim);
+    border-bottom: 1px solid var(--border);
 }
 
 .post-title {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
     margin-bottom: 1rem;
-}
-
-.prompt {
-    color: var(--terminal-dim);
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: bold;
 }
 
 .post-title h1 {
     margin: 0;
-    color: var(--terminal-green);
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    color: var(--text-primary);
+    font-size: 2.5rem;
+    line-height: 1.2;
 }
 
 .post-meta {
     color: var(--text-secondary);
-    font-family: 'JetBrains Mono', monospace;
     font-size: 0.9rem;
     display: flex;
     gap: 1.5rem;
@@ -98,33 +88,27 @@ layout: default
     color: var(--accent);
     text-decoration: none;
     padding: 0.25rem 0.5rem;
-    border: 1px solid var(--terminal-dim);
+    border: 1px solid var(--border);
     border-radius: 4px;
     transition: all 0.2s ease;
 }
 
 .category-link:hover {
-    color: var(--accent-hover);
-    border-color: var(--terminal-green);
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+    color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .post-content {
-    font-family: 'JetBrains Mono', monospace;
     line-height: 1.8;
     color: var(--text-primary);
 }
 
 .post-content h2 {
-    color: var(--terminal-green);
+    color: var(--text-primary);
     margin-top: 2rem;
     margin-bottom: 1rem;
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
-}
-
-.post-content h2::before {
-    content: "> ";
-    color: var(--terminal-dim);
+    font-size: 1.8rem;
 }
 
 .post-content p {
@@ -135,15 +119,16 @@ layout: default
     background: var(--bg-primary);
     padding: 0.2rem 0.4rem;
     border-radius: 4px;
-    border: 1px solid var(--terminal-dim);
-    color: var(--terminal-green);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
 }
 
 .post-content pre {
     background: var(--bg-primary);
     padding: 1rem;
     border-radius: 4px;
-    border: 1px solid var(--terminal-dim);
+    border: 1px solid var(--border);
     overflow-x: auto;
     margin: 1.5rem 0;
 }
@@ -156,7 +141,7 @@ layout: default
 .post-footer {
     margin-top: 3rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--terminal-dim);
+    border-top: 1px solid var(--border);
 }
 
 .post-tags {
@@ -164,7 +149,6 @@ layout: default
     gap: 1rem;
     align-items: center;
     flex-wrap: wrap;
-    font-family: 'JetBrains Mono', monospace;
     color: var(--text-secondary);
 }
 
@@ -172,15 +156,31 @@ layout: default
     color: var(--accent);
     text-decoration: none;
     padding: 0.25rem 0.5rem;
-    border: 1px solid var(--terminal-dim);
+    border: 1px solid var(--border);
     border-radius: 4px;
     transition: all 0.2s ease;
 }
 
 .tag:hover {
-    color: var(--accent-hover);
-    border-color: var(--terminal-green);
-    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+    color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    .post {
+        padding: 1rem;
+    }
+    
+    .post-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .post-title h1 {
+        font-size: 2rem;
+    }
 }
 </style>
 
