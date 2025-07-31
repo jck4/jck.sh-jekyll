@@ -1,0 +1,241 @@
+---
+layout: resume
+title: Resume
+description: Professional resume and CV of jck, Software Engineer and Cybersecurity Specialist
+---
+
+<div class="resume-page">
+    <!-- Minimal header with compact actions -->
+    <div class="resume-header-minimal">
+        <div class="resume-actions-compact">
+            <a href="/assets/resume/resume.pdf" download="jck-resume.pdf" class="action-btn download" aria-label="Download resume as PDF" title="Download PDF">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M12 16L7 11H10V4H14V11H17L12 16Z" fill="currentColor"/>
+                    <path d="M20 18H4V20H20V18Z" fill="currentColor"/>
+                </svg>
+            </a>
+            <a href="/assets/resume/resume.pdf" target="_blank" rel="noopener noreferrer" class="action-btn view" aria-label="View resume in full screen" title="Open in new tab">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M14 3V5H17.59L7.76 14.83L9.17 16.24L19 6.41V10H21V3H14Z" fill="currentColor"/>
+                    <path d="M19 19H5V5H12V3H5C3.89 3 3 3.9 3 5V19C3 20.1 3.89 21 5 21H19C20.1 21 21 20.1 21 19V12H19V19Z" fill="currentColor"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <!-- Full-height PDF viewer -->
+    <div class="resume-container-full">
+        <div class="pdf-viewer-full">
+            <iframe 
+                src="/assets/resume/resume.pdf#view=FitH&toolbar=0&navpanes=0&scrollbar=1" 
+                type="application/pdf"
+                title="Resume - Jacob Burgett"
+                class="pdf-frame-full"
+                loading="lazy">
+                <div class="pdf-fallback-minimal">
+                    <h3>Resume - Jacob Burgett</h3>
+                    <p>Software Engineer & Cybersecurity Specialist</p>
+                    <a href="/assets/resume/resume.pdf" download="jck-resume.pdf" class="fallback-download-minimal" aria-label="Download Jacob Burgett's resume">Download Resume PDF</a>
+                </div>
+            </iframe>
+        </div>
+    </div>
+
+</div>
+
+<style>
+/* Resume-specific body styling */
+.resume-body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: #ffffff;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.resume-main {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.resume-page {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+/* Minimal compact header */
+.resume-header-minimal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom-left-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.resume-actions-compact {
+    display: flex;
+    gap: 8px;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 1px solid #e0e0e0;
+    background: white;
+    color: #666;
+}
+
+.action-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.action-btn.download {
+    color: #0066cc;
+    border-color: #0066cc;
+}
+
+.action-btn.download:hover {
+    background: #0066cc;
+    color: white;
+}
+
+.action-btn.view {
+    color: #666;
+}
+
+.action-btn.view:hover {
+    background: #f5f5f5;
+    color: #333;
+}
+
+/* Full-screen PDF container */
+.resume-container-full {
+    flex: 1;
+    height: 100vh;
+    background: #f8f9fa;
+}
+
+.pdf-viewer-full {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.pdf-frame-full {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+    background: white;
+}
+
+/* Minimal fallback */
+.pdf-fallback-minimal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+}
+
+.pdf-fallback-minimal h3 {
+    margin: 0 0 0.5rem 0;
+    color: #333;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.pdf-fallback-minimal p {
+    margin: 0 0 1.5rem 0;
+    color: #666;
+    font-size: 1rem;
+}
+
+.fallback-download-minimal {
+    display: inline-block;
+    padding: 12px 24px;
+    background: #0066cc;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background 0.2s ease;
+}
+
+.fallback-download-minimal:hover {
+    background: #0052a3;
+}
+
+/* Focus styles for accessibility */
+.action-btn:focus,
+.fallback-download-minimal:focus {
+    outline: 2px solid #0066cc;
+    outline-offset: 2px;
+}
+
+.action-btn:focus:not(:focus-visible),
+.fallback-download-minimal:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .resume-header-minimal {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        padding: 8px 12px;
+        border-radius: 0;
+        border-bottom: 1px solid #e0e0e0;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .resume-container-full {
+        margin-top: 60px; /* Account for fixed header */
+        height: calc(100vh - 60px);
+    }
+    
+    .action-btn {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .pdf-fallback-minimal {
+        margin: 0 1rem;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .pdf-fallback-minimal h3 {
+        font-size: 1.25rem;
+    }
+    
+    .pdf-fallback-minimal p {
+        font-size: 0.9rem;
+    }
+}
+</style> 
