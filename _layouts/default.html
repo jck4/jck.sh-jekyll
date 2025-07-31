@@ -59,31 +59,39 @@
     }
     </script>
 </head>
-<body>
-    <div class="paper-wrapper">
-        <header class="site-header">
-            <nav>
-                <div class="nav-links">
-                    <a href="/" class="home-link">Home</a>
-                    <a href="/blog" class="blog-link">Blog</a>
-                    <a href="/projects" class="projects-link">Projects</a>
-                </div>
-                <div class="social-links">
-                    {% if site.social.github %}
-                    <a href="https://github.com/{{ site.social.github }}" class="social-link">GitHub</a>
-                    {% endif %}
-                    {% if site.social.linkedin %}
-                    <a href="https://linkedin.com/in/{{ site.social.linkedin }}" class="social-link">LinkedIn</a>
-                    {% endif %}
-                </div>
-            </nav>
-        </header>
-        <main>
+<body{% if page.page_class %} class="{{ page.page_class }}"{% endif %}>
+    {% if page.page_class == 'resume-page-full' %}
+        <!-- Resume full-screen layout -->
+        <main class="resume-main">
             {{ content }}
         </main>
-        <footer class="site-footer">
-            <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
-        </footer>
-    </div>
+    {% else %}
+        <!-- Default layout with navigation -->
+        <div class="paper-wrapper">
+            <header class="site-header">
+                <nav>
+                    <div class="nav-links">
+                        <a href="/" class="home-link">Home</a>
+                        <a href="/blog" class="blog-link">Blog</a>
+                        <a href="/projects" class="projects-link">Projects</a>
+                    </div>
+                    <div class="social-links">
+                        {% if site.social.github %}
+                        <a href="https://github.com/{{ site.social.github }}" class="social-link">GitHub</a>
+                        {% endif %}
+                        {% if site.social.linkedin %}
+                        <a href="https://linkedin.com/in/{{ site.social.linkedin }}" class="social-link">LinkedIn</a>
+                        {% endif %}
+                    </div>
+                </nav>
+            </header>
+            <main>
+                {{ content }}
+            </main>
+            <footer class="site-footer">
+                <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
+            </footer>
+        </div>
+    {% endif %}
 </body>
 </html> 
