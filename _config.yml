@@ -65,6 +65,11 @@ defaults:
     values:
       layout: "default"
   - scope:
+      path: "resume.html"
+      type: "pages"
+    values:
+      layout: "resume"
+  - scope:
       path: ""
       type: "posts"
     values:
